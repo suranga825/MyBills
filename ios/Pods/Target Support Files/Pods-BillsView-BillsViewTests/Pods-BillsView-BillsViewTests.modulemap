@@ -1,0 +1,6 @@
+module Pods_BillsView_BillsViewTests {
+  umbrella header "Pods-BillsView-BillsViewTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
