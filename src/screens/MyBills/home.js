@@ -5,13 +5,15 @@ import {
     SafeAreaView,
     StyleSheet,
     FlatList,
-    Image
+    Image,
+    RefreshControl
   } from 'react-native';
   import { ListItem, Avatar } from 'react-native-elements'
 
 export function Home() {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState(0);
+  const [isRefreshing, setRefreshing] = useState(false);
 
   const DATA = [
     {
@@ -27,6 +29,15 @@ export function Home() {
       title: 'SA Water',
     },
   ];
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(
+      () => { setRefreshing(false)},
+      2000
+    )
+  }, []);
+
 
   const Item = ({ title }) => (
     <ListItem style={styles.item} bottomDivider>
@@ -61,6 +72,12 @@ export function Home() {
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+          />
+        }
       />
     </SafeAreaView>
   );

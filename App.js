@@ -15,7 +15,7 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 
 import {
@@ -28,38 +28,35 @@ import {
 
 import { NavigationContainer , DefaultTheme} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {Home} from './src/screens/home.js';
+import configureStore from'./store.js'
+import { Provider } from 'react-redux';
+
+import {Home} from './src/screens/MyBills/home.js';
 
 const App: () => React$Node = () => {
   const Stack = createStackNavigator();
 
-  const AppTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      primary: 'rgb(252, 217, 0)',
-    },
-  };
   return (
-    <NavigationContainer theme={AppTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: 'My Bills',
-            headerStyle: {
-              backgroundColor: 'rgb(252, 217, 0)',
-            },
-            headerTintColor: '#000',
-            headerTitleStyle: {
-              fontWeight: '500',
-            },
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-    
+    <Provider store={configureStore}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              title: 'My Bills',
+              headerStyle: {
+                backgroundColor: 'rgb(252, 217, 0)',
+              },
+              headerTintColor: '#000',
+              headerTitleStyle: {
+                fontWeight: '500',
+              },
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
