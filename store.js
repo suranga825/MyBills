@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import myBillsReducer from './src/screens/MyBills/myBillsSlice.js';
+import billsReducer from './src/reducers/billsReducer.js';
 
 export default configureStore({
   reducer: {
-    myBiils: myBillsReducer,
+    bills: billsReducer,
   },
 });
